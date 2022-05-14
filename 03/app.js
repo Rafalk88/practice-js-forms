@@ -1,4 +1,4 @@
-//(function(){
+(function(){
 
 const imagesEl = document.querySelector('.files')
 const imagesList = document.querySelector('.images-list')
@@ -43,4 +43,4 @@ function loadImages(e) {
 
 imagesEl.lastElementChild.addEventListener('change', loadImages)
 
-//})()
+})()

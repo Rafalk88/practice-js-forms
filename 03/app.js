@@ -5,29 +5,39 @@ const imagesList = document.querySelector('.images-list')
 
 function loadImages(e) {
 
-    const file = e.target.files[0]
+    for (let i = 0; i < e.target.files.length; i++) {
 
-    if (file && file.type.includes('image')) {
+        const file = e.target.files[i]
 
-        const reader = new FileReader()
+        if (file && file.type.includes('image')) {
 
-        reader.onload = function(readerEvent) {
+            const reader = new FileReader()
 
-            liItem = imagesList.lastElementChild
-            liItem.classList.remove('images-list__item--prototype')
+            reader.onload = function(readerEvent) {
 
-            imageProperties = liItem.children
-            const sizeInMB = (file.size / (1024*1024)).toFixed(2)
+                liItem = imagesList.lastElementChild
 
-            imageProperties[0].innerText = file.name
-            imageProperties[1].src = readerEvent.target.result
-            imageProperties[2].innerText = (sizeInMB + ' MB')
+                liItemClone = liItem.cloneNode(true)
+
+                liItemClone.classList.remove('images-list__item--prototype')
+
+                imageProperties = liItemClone.children
+                const sizeInMB = (file.size / (1024*1024)).toFixed(2)
+
+                imageProperties[0].innerText = file.name
+                imageProperties[1].src = readerEvent.target.result
+                imageProperties[2].innerText = (sizeInMB + ' MB')
+
+                imagesList.appendChild(liItemClone)
+
+            }
+
+            reader.readAsDataURL(file)
 
         }
 
-        reader.readAsDataURL(file)
-
     }
+    
 
 }
 

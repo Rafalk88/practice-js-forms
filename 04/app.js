@@ -3,6 +3,24 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     const boxElement = document.querySelector('.box');
     setBoxShadow(boxElement, '#000000');
+
+    const panelEl = document.querySelector('.panel')
+    const colorEl = panelEl.children.color
+    const opacityEl = panelEl.children.opacity
+
+    colorEl.addEventListener('change', changeColorAndOrOpacity)
+    opacityEl.addEventListener('change', changeColorAndOrOpacity)
+    opacityEl.addEventListener('mousemove', changeColorAndOrOpacity)
+
+    function changeColorAndOrOpacity() {
+
+        const color = colorEl.value
+        const opacity = opacityEl.value / 100
+       
+        setBoxShadow(boxElement, color, opacity)
+
+    }
+
 }
 
 function setBoxShadow(element, colorInHex, opacity = 1) {
